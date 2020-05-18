@@ -230,17 +230,19 @@ import win32com.client
 #         def inner(self, n):
 #             if not isinstance(n, int):
 #                 raise TypeError("当前这个数据的类型有问题, 应该是一个整型数据")
+#
 #             return func(self, n)
-#
+#前面的代码在return func之前先完成一些装饰器的功能，然后返回，执行func的功能。
 #         return inner
-#
+#inner返回一个和被装饰实例方法形参相同的方法：装饰器功能+func原有功能。由此构成装饰器，优点是装饰器功能独立于func的功能，模块化设计。
+#装饰器__check_num_zsq的作用：jia(self,n)=__check_num_zsq(jia(slef,n))
 #     # def __say(self, word):
 #     #     # 1. 创建一个播报器对象
 #     #     speaker = win32com.client.Dispatch("SAPI.SpVoice")
 #     #
 #     #     # 2. 通过这个播报器对象, 直接, 播放相对应的语音字符串就可以
 #     #     speaker.Speak(word)
-#
+#生成装饰器的函数，返回_say_zsq装饰器
 #     def create_say_zsq(word=""):
 #         def __say_zsq(func):
 #             def inner(self, n):
@@ -253,7 +255,7 @@ import win32com.client
 #             return inner
 #
 #         return __say_zsq
-#
+#jia(self,n)=create_say_zsq(
 #     @__check_num_zsq
 #     @create_say_zsq()
 #     def __init__(self, num):
